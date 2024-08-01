@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Admin.Views
+namespace Admin.Views.UserContors
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for InfoCard.xaml
     /// </summary>
-    public partial class LoginView : Page
+    public partial class InfoCard : UserControl
     {
-        public LoginView()
+        public InfoCard()
         {
             InitializeComponent();
         }

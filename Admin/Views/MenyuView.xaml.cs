@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Admin.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for MenyuView.xaml
     /// </summary>
-    public partial class LoginView : Page
+    public partial class MenyuView : Page
     {
-        public LoginView()
+        public MenyuView()
         {
             InitializeComponent();
         }
