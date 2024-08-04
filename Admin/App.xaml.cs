@@ -30,6 +30,7 @@ public partial class App : Application
         Container.RegisterSingleton<MainViewModel>();
         Container.RegisterSingleton<LoginViewModel>();
         Container.RegisterSingleton<MenyuViewModel>();
+        Container.RegisterSingleton<DashBoardViewModel>();
     }
 
     private static void AddViews()
@@ -37,6 +38,7 @@ public partial class App : Application
         Container.RegisterSingleton<MainView>();
         Container.RegisterSingleton<LoginView>();
         Container.RegisterSingleton<MenyuView>();
+        Container.RegisterSingleton<DashBoardView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)

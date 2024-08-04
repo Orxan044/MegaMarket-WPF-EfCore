@@ -20,7 +20,7 @@
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Color="#223266" Offset="0" />
-                    <GradientStop Color="#ff920f" Offset="1" />
+                    <GradientStop Color="#27376B" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -47,49 +47,49 @@
                 <Separator Height="0.8" Background="#46558a" Margin="20 30 20 30"/>
 
 
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 0" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 0" Height="40" Width="auto" Command="{Binding DashBoardCommand}" >
                     <StackPanel Orientation="Horizontal" Width="138" Height="35" Margin="0 0 0 0">
                         <material:PackIcon Kind="Home" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="DashBoard" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 2" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 2" Height="40" Width="auto" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="Sms" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Message" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 0" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 0" Height="40" Width="auto" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="Category" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Category" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 2" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 2" Height="40" Width="auto" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="food" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Products" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 0" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 0" Height="40" Width="auto" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="Avalanche" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Statistics" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 2" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 2" Height="40" Width="auto" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="Motorbike" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Kargo" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#7F7CF1" BorderBrush="#7F7CF1" Margin="0 0" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 0" Height="40" Width="auto" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="Settings" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Settings" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="Red" BorderBrush="Red" Margin="0 4" Height="40" Width="auto" >
+                <Button Background="Red" BorderBrush="Red" Margin="0 4" Height="40" Width="auto" Command="{Binding ExitCommand}" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="ExitRun" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Log Out" FontSize="15" Padding="10 7"/>
@@ -98,6 +98,8 @@
 
             </StackPanel>
         </Border>
+
+        <Frame Content="{Binding CurrentPage2}" Grid.Column="1" Width="750" Height="500" NavigationUIVisibility="Hidden" ></Frame>
 
 
     </Grid>

@@ -47,7 +47,8 @@ public class LoginViewModel : BaseViewModel
             {
                 notifier.ShowSuccess("You Are Logged In Correctly");
                 checking = false;
-                _navigationService.Navigate<MenyuView, MenyuViewModel>();
+                MainViewModel mainVm = new();
+                _navigationService.Navigate<MenyuView, MenyuViewModel>(mainVm.CurrentPage);
             }
         }
 

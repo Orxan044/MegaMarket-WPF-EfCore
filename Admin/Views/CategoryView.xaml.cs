@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Admin.Views.UserContors
+namespace Admin.Views
 {
     /// <summary>
-    /// Interaction logic for InfoCard.xaml
+    /// Interaction logic for CategoryView.xaml
     /// </summary>
-    public partial class InfoCard : UserControl
+    public partial class CategoryView : Page
     {
-        public InfoCard()
+        public CategoryView()
         {
             InitializeComponent();
         }

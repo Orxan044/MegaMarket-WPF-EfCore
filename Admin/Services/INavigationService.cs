@@ -5,6 +5,6 @@ namespace Admin.Services;
 
 public interface INavigationService
 {
-    void Navigate<TView, TViewModel>() where TView : Page where TViewModel : BaseViewModel;
+    void Navigate<TView, TViewModel>(Page? CurrentPage) where TView : Page where TViewModel : BaseViewModel;
 
 }
