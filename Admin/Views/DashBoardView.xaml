@@ -10,13 +10,17 @@
       Title="DashBoardView">
     <!--1.Total Price , Orders , Users , -->
     <Grid Background="#41518F" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="113*"/>
+        </Grid.ColumnDefinitions>
 
 
         <TextBlock FontSize="26" Foreground="#CCD7FF" Margin="50 35 0 400" Text="Good Afternoon, Orxan" HorizontalAlignment="Left"/>
-        <Button Content="Today" Style="{StaticResource topMenuButton}" Background="#5B60C4" Foreground="#ffffff" Margin="636,40,34,430"/>
+        <Button Content="Today" Style="{StaticResource topMenuButton}" Background="#5B60C4" Foreground="#ffffff" Margin="225,40,34,430" Grid.Column="1"/>
 
 
-        <Border Margin="400,103,50,250" >
+        <Border Margin="400,103,50,250" Grid.ColumnSpan="2" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                     <GradientStop Color="#FD8A87" Offset="0" />
@@ -46,7 +50,7 @@
 
         </Border>
 
-        <Border Margin="50,303,400,50" >
+        <Border Margin="50,303,61,50" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                     <GradientStop Color="#FC84CB" Offset="0" />
@@ -75,7 +79,7 @@
         </Border>
 
 
-        <Border Margin="400,303,50,50" >
+        <Border Margin="400,303,50,50" Grid.ColumnSpan="2" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                     <GradientStop Color="#827BFF" Offset="0" />
@@ -87,7 +91,7 @@
             </Border.Clip>
         </Border>
 
-        <Border Margin="50,103,400,250" >
+        <Border Margin="50,103,61,250" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                     <GradientStop Color="#827BFF" Offset="0" />

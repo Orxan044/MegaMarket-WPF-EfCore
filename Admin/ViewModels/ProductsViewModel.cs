@@ -4,5 +4,7 @@ namespace Admin.ViewModels;
 
 public class ProductsViewModel : BaseViewModel
 {
-    
+    public ProductsViewModel()
+    {
+    }
 }

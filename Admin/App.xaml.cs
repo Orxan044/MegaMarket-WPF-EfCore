@@ -1,5 +1,6 @@
 ﻿using Admin.Data;
 using Admin.Data.Repositories;
+using Admin.Models.Concretes;
 using Admin.Services;
 using Admin.ViewModels;
 using Admin.Views;
@@ -21,7 +22,11 @@ public partial class App : Application
     private static void AddOtherServices()
     {
         Container.RegisterSingleton<AdminDbContext>();
+        Container.RegisterSingleton<MarketDbContext>();
+
         Container.RegisterSingleton<IRepository<Models.Concretes.Admin, AdminDbContext>, Repository<Models.Concretes.Admin, AdminDbContext>>();
+        Container.RegisterSingleton<IRepository<Category, MarketDbContext>, Repository<Category, MarketDbContext>>();
+       
         Container.RegisterSingleton<INavigationService, NavigationService>();
     }
 
@@ -31,6 +36,8 @@ public partial class App : Application
         Container.RegisterSingleton<LoginViewModel>();
         Container.RegisterSingleton<MenyuViewModel>();
         Container.RegisterSingleton<DashBoardViewModel>();
+        Container.Register<CategoryViewModel>();
+        Container.Register<ProductsViewModel>();
     }
 
     private static void AddViews()
@@ -39,6 +46,8 @@ public partial class App : Application
         Container.RegisterSingleton<LoginView>();
         Container.RegisterSingleton<MenyuView>();
         Container.RegisterSingleton<DashBoardView>();
+        Container.RegisterSingleton<CategoryView>();
+        Container.RegisterSingleton<ProductsView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)

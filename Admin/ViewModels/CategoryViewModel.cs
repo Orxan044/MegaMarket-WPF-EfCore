@@ -1,7 +1,113 @@
-﻿using Admin.Models.Abstract;
+﻿using Admin.Command;
+using Admin.Data;
+using Admin.Data.Repositories;
+using Admin.Models.Abstract;
+using Admin.Models.Concretes;
+using Admin.Services;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Data;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace Admin.ViewModels;
 
-public class CategoryViewModel : BaseViewModel
+public class CategoryViewModel : BaseViewModel , INotifyPropertyChanged
 {
+    private string? _searchText;
+    private ICollectionView _categoriesView;
+
+    public string SearchText
+    {
+        get => _searchText!;
+        set
+        {
+            _searchText = value;
+            OnPropertyChanged();
+            _categoriesView.Refresh();
+        }
+    }
+
+    private Category? _selectedCategory;
+    public Category SelectedCategory { get => _selectedCategory!; set { _selectedCategory = value; OnPropertyChanged(); } }
+
+    private ObservableCollection<Category>? _categories;
+
+    public ObservableCollection<Category> Categories { get => _categories!; set { _categories = value; OnPropertyChanged(); } }
+
+    private readonly MarketDbContext _marketDbContext;
+    private readonly INavigationService _navigationService;
+    private readonly IRepository<Category, MarketDbContext> _categoryRepository;
+
+    public RelayCommand ShowCategoryCommand { get; set; }
+    public RelayCommand DeleteCategoryCommand { get; set; }
+    public CategoryViewModel(INavigationService navigationService,MarketDbContext marketDbContext , IRepository<Category,MarketDbContext> categoryRepository)
+    {
+        _navigationService = navigationService;
+        _marketDbContext = marketDbContext;
+        _categoryRepository = categoryRepository;
+        Categories = new ObservableCollection<Category>(_categoryRepository.GetAll());
+
+        ShowCategoryCommand = new RelayCommand(ShowCategoryClick);
+        DeleteCategoryCommand = new RelayCommand(DeleteCategoryClick);
+
+        _categoriesView = CollectionViewSource.GetDefaultView(Categories);
+        _categoriesView.Filter = FilterCategories;
+    }
+
+    private void DeleteCategoryClick(object? id)
+    {
+        if (SelectedCategory is not null)
+        {
+            _categoryRepository.Delete(SelectedCategory);
+            _categoryRepository.SaveChanges();
+            MenyuViewModel viewModel = new(_navigationService, _marketDbContext);
+            viewModel.CategoriesClick(id);
+            notifier.ShowSuccess("The Category Has Been Removed Successfully");
+        }
+        else notifier.ShowWarning("Please Selected Category !!!");
+    }
+
+    private void ShowCategoryClick(object? id)
+    {
+        SelectedCategory = _categoryRepository.Get(Convert.ToInt32(id))!;     
+    }
+
+    private bool FilterCategories(object obj)
+    {
+        if (obj is Category category)
+        {
+            return string.IsNullOrEmpty(SearchText) || category.Name!.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            string.IsNullOrEmpty(SearchText) || category.Id.ToString()!.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+        }
+        return false;
+    }
+
+
+
+    #region INotifyPropertyChanged event
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string? paramName = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName));
+    #endregion
+
+    #region Create notifier
+    ToastNotifications.Notifier notifier = new ToastNotifications.Notifier(cfg =>
+    {
+        cfg.PositionProvider = new WindowPositionProvider(
+            parentWindow: Application.Current.MainWindow,
+            corner: Corner.TopLeft,
+            offsetX: 5,
+            offsetY: 5);
+
+        cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+            notificationLifetime: TimeSpan.FromSeconds(2),
+            maximumNotificationCount: MaximumNotificationCount.FromCount(1));
+
+        cfg.Dispatcher = Application.Current.Dispatcher;
+    });
+    #endregion
 }

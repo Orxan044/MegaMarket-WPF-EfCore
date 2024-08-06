@@ -59,13 +59,13 @@
                         <TextBlock  Text="Message" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 0" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 0" Height="40" Width="auto" Command="{Binding CategoriesCommand}" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="Category" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
-                        <TextBlock  Text="Category" FontSize="15" Padding="10 7"/>
+                        <TextBlock  Text="Categories" FontSize="15" Padding="10 7"/>
                     </StackPanel>
                 </Button>
-                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 2" Height="40" Width="auto" >
+                <Button Background="#BCCAF1" BorderBrush="#BCCAF1" Margin="0 2" Height="40" Width="auto" Command="{Binding ProductsCommand}" >
                     <StackPanel Orientation="Horizontal" Width="133" Height="35" Margin="0 0">
                         <material:PackIcon Kind="food" Width="25" Height="25" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <TextBlock  Text="Products" FontSize="15" Padding="10 7"/>

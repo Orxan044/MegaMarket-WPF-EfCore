@@ -13,7 +13,4 @@ public class Product : BaseEntity
     public double? Price { get; set; }
     public bool? IsSpecial { get; set; } = false;
     public Category? Category { get; set; }
-    public Category? CategoryCategory { get; set;}
-
-
 }

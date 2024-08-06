@@ -12,7 +12,7 @@
 
         <TextBlock FontSize="26" Foreground="#CCD7FF" Margin="50 35 0 400" Text="Products" HorizontalAlignment="Left"/>
 
-        <Button Content="Add Product" Style="{StaticResource topMenuButton }" Background="Green"  Foreground="#ffffff" Width="120" Margin="603,38,27,432" Click="Button_Click"/>
+        <Button Content="Add Product" Style="{StaticResource topMenuButton }" Background="Green"  Foreground="#ffffff" Width="120" Margin="603,38,27,432" />
         
         
         
