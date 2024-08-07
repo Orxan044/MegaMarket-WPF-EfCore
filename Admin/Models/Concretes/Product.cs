@@ -13,4 +13,7 @@ public class Product : BaseEntity
     public double? Price { get; set; }
     public bool? IsSpecial { get; set; } = false;
     public Category? Category { get; set; }
+
+    public Product Clone() => new() { Id = Id , ImagePath = ImagePath, Name = Name, Description = Description, Quantity = Quantity, CategoryId = CategoryId, Price = Price, IsSpecial = IsSpecial , Category = Category };
+
 }

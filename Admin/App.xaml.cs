@@ -26,6 +26,7 @@ public partial class App : Application
 
         Container.RegisterSingleton<IRepository<Models.Concretes.Admin, AdminDbContext>, Repository<Models.Concretes.Admin, AdminDbContext>>();
         Container.RegisterSingleton<IRepository<Category, MarketDbContext>, Repository<Category, MarketDbContext>>();
+        Container.RegisterSingleton<IRepository<Product, MarketDbContext>, Repository<Product, MarketDbContext>>();
        
         Container.RegisterSingleton<INavigationService, NavigationService>();
     }
@@ -37,7 +38,9 @@ public partial class App : Application
         Container.RegisterSingleton<MenyuViewModel>();
         Container.RegisterSingleton<DashBoardViewModel>();
         Container.Register<CategoryViewModel>();
+        Container.RegisterSingleton<AddCategoryViewModel>();
         Container.Register<ProductsViewModel>();
+        Container.Register<ProductShowViewModel>();
     }
 
     private static void AddViews()
@@ -47,7 +50,9 @@ public partial class App : Application
         Container.RegisterSingleton<MenyuView>();
         Container.RegisterSingleton<DashBoardView>();
         Container.RegisterSingleton<CategoryView>();
+        Container.RegisterSingleton<AddCategoryView>();
         Container.RegisterSingleton<ProductsView>();
+        Container.RegisterSingleton<ProductShowView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)

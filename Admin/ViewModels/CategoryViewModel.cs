@@ -4,6 +4,7 @@ using Admin.Data.Repositories;
 using Admin.Models.Abstract;
 using Admin.Models.Concretes;
 using Admin.Services;
+using Admin.Views;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -35,27 +36,35 @@ public class CategoryViewModel : BaseViewModel , INotifyPropertyChanged
     public Category SelectedCategory { get => _selectedCategory!; set { _selectedCategory = value; OnPropertyChanged(); } }
 
     private ObservableCollection<Category>? _categories;
+    private MenyuViewModel _viewModel;
 
     public ObservableCollection<Category> Categories { get => _categories!; set { _categories = value; OnPropertyChanged(); } }
 
-    private readonly MarketDbContext _marketDbContext;
-    private readonly INavigationService _navigationService;
     private readonly IRepository<Category, MarketDbContext> _categoryRepository;
 
     public RelayCommand ShowCategoryCommand { get; set; }
     public RelayCommand DeleteCategoryCommand { get; set; }
-    public CategoryViewModel(INavigationService navigationService,MarketDbContext marketDbContext , IRepository<Category,MarketDbContext> categoryRepository)
-    {
-        _navigationService = navigationService;
-        _marketDbContext = marketDbContext;
+    public RelayCommand AddCategoryCommand { get; set; }
+
+    public CategoryViewModel(IRepository<Category,MarketDbContext> categoryRepository,MenyuViewModel viewModel)
+    {        
+        
         _categoryRepository = categoryRepository;
+        _viewModel = viewModel;
+
         Categories = new ObservableCollection<Category>(_categoryRepository.GetAll());
 
         ShowCategoryCommand = new RelayCommand(ShowCategoryClick);
         DeleteCategoryCommand = new RelayCommand(DeleteCategoryClick);
+        AddCategoryCommand = new RelayCommand(AddCategoryClick);
 
         _categoriesView = CollectionViewSource.GetDefaultView(Categories);
         _categoriesView.Filter = FilterCategories;
+    }
+
+    private void AddCategoryClick(object? obj)
+    {
+        _viewModel.AddCategoryClick(obj);
     }
 
     private void DeleteCategoryClick(object? id)
@@ -64,8 +73,7 @@ public class CategoryViewModel : BaseViewModel , INotifyPropertyChanged
         {
             _categoryRepository.Delete(SelectedCategory);
             _categoryRepository.SaveChanges();
-            MenyuViewModel viewModel = new(_navigationService, _marketDbContext);
-            viewModel.CategoriesClick(id);
+            _viewModel.CategoriesClick(id);
             notifier.ShowSuccess("The Category Has Been Removed Successfully");
         }
         else notifier.ShowWarning("Please Selected Category !!!");
@@ -81,7 +89,7 @@ public class CategoryViewModel : BaseViewModel , INotifyPropertyChanged
         if (obj is Category category)
         {
             return string.IsNullOrEmpty(SearchText) || category.Name!.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-            string.IsNullOrEmpty(SearchText) || category.Id.ToString()!.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+            category.Id.ToString()!.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
         return false;
     }

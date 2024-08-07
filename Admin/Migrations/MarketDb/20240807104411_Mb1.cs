@@ -5,7 +5,7 @@
 namespace Admin.Migrations.MarketDb
 {
     /// <inheritdoc />
-    public partial class CreatMegaMarketDb : Migration
+    public partial class Mb1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,28 +36,17 @@ namespace Admin.Migrations.MarketDb
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
-                    IsSpecial = table.Column<bool>(type: "bit", nullable: true),
-                    CategoryCategoryId = table.Column<int>(type: "int", nullable: true)
+                    IsSpecial = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryCategoryId",
-                        column: x => x.CategoryCategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryCategoryId",
-                table: "Products",
-                column: "CategoryCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",

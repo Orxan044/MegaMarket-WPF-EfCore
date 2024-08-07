@@ -1,4 +1,7 @@
-﻿using Admin.Models.Abstract;
+﻿using Admin.Data;
+using Admin.Data.Repositories;
+using Admin.Models.Abstract;
+using Admin.Models.Concretes;
 using Admin.ViewModels;
 using System.Windows.Controls;
 
@@ -16,8 +19,8 @@ public class NavigationService : INavigationService
             mainVm.CurrentPage.DataContext = App.Container.GetInstance<TViewModel>();
         }
         if(mainVm2 is not null)
-        {
-            mainVm2.CurrentPage2 = App.Container.GetInstance<TView>();
+        {  
+            mainVm2!.CurrentPage2 = App.Container.GetInstance<TView>();
             mainVm2.CurrentPage2.DataContext = App.Container.GetInstance<TViewModel>();
         }
     }

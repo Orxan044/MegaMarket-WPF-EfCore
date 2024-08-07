@@ -10,23 +10,27 @@
       Title="CategoryView">
 
 
-    <Grid Background="#5969A2  " >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="26*"/>
-            <ColumnDefinition Width="49*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="#5969A2">
 
         <TextBlock FontSize="26" Foreground="#CCD7FF" Margin="13,17,0,445" Text="Categories" HorizontalAlignment="Left" Width="126"/>
 
-        <material:Badged Badge="{material:PackIcon Kind=Add}" 
-                    Margin="320,29,0,0"
-                    BadgeBackground="LightGreen" RenderTransformOrigin="0.473,-0.04" Grid.Column="1" >
+        <!--<material:Badged Badge="{material:PackIcon Kind=Add}" 
+                    BadgeBackground="LightGreen" RenderTransformOrigin="0.473,-0.04" Width="385" >
             <Button BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Content="ADD CATEGORY"
-                        Command="{Binding AddDriverClickCommand}" Width="148"
+                        Command="{Binding AddDriverClickCommand}" Width="174"
                         Style="{StaticResource MaterialDesignRaisedSecondaryButton}"/>
-        </material:Badged>
+        </material:Badged>-->
         <!--<Button Content="Add Category" Style="{StaticResource topMenuButton }" Background="Green"  Foreground="#ffffff" Width="120" Margin="610,52,20,418"/>-->
 
+
+        <material:Badged Badge="{material:PackIcon Kind=AddBold}" 
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    BadgeBackground="LightGreen" Margin="20 15">
+            <Button BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Content="ADD CATEGORY"
+                        Command="{Binding AddCategoryCommand}"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryButton}"/>
+        </material:Badged>
+         
         <TextBox x:Name="txbSearch" HorizontalAlignment="Left" VerticalAlignment="Top"
                      Style="{StaticResource MaterialDesignTextBoxBase}" VerticalContentAlignment="Center"
                      Width="334" Height="33" Margin="13,87,0,0" 
@@ -36,12 +40,12 @@
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
             <material:HintAssist.Hint>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Search Category" Padding="5 0 0 0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Search Category (Name,Id)" Padding="5 0 0 0" VerticalAlignment="Center"/>
                 </StackPanel>
             </material:HintAssist.Hint>
         </TextBox>
 
-        <ListView FontSize="18" Foreground="Black" ItemsSource="{Binding Categories}" Width="375" Height="380" VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="ListView1" Grid.ColumnSpan="2">
+        <ListView FontSize="18" Foreground="Black" ItemsSource="{Binding Categories}" Width="375" Height="380" VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="ListView1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn  Header="Id" DisplayMemberBinding="{Binding Id}" Width="80"></GridViewColumn>

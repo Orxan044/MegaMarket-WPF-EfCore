@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Admin.Migrations.MarketDb
 {
     [DbContext(typeof(MarketDbContext))]
-    [Migration("20240804113002_CreatMegaMarketDb")]
-    partial class CreatMegaMarketDb
+    [Migration("20240807104411_Mb1")]
+    partial class Mb1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,9 +52,6 @@ namespace Admin.Migrations.MarketDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
@@ -78,8 +75,6 @@ namespace Admin.Migrations.MarketDb
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryCategoryId");
-
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
@@ -87,18 +82,12 @@ namespace Admin.Migrations.MarketDb
 
             modelBuilder.Entity("Admin.Models.Concretes.Product", b =>
                 {
-                    b.HasOne("Admin.Models.Concretes.Category", "CategoryCategory")
-                        .WithMany()
-                        .HasForeignKey("CategoryCategoryId");
-
                     b.HasOne("Admin.Models.Concretes.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Category");
-
-                    b.Navigation("CategoryCategory");
                 });
 
             modelBuilder.Entity("Admin.Models.Concretes.Category", b =>

@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="mLogo.jpg" />
     <None Remove="Photos\mLogo.png" />
+    <None Remove="Photos\whiteBackGround.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="mLogo.jpg" />
     <Resource Include="Photos\mLogo.png" />
+    <Resource Include="Photos\whiteBackGround.jpg" />
   </ItemGroup>
 
 </Project>
