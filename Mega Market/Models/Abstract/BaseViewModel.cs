@@ -4,11 +4,10 @@ using System.Windows;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Position;
 
-namespace Admin.Models.Abstract;
+namespace Mega_Market.Models.Abstract;
 
-public abstract class BaseViewModel : INotifyPropertyChanged
+public abstract class BaseViewModel
 {
-
     #region Create notifier
     public ToastNotifications.Notifier notifier = new ToastNotifications.Notifier(cfg =>
     {
@@ -31,5 +30,4 @@ public abstract class BaseViewModel : INotifyPropertyChanged
     protected void OnPropertyChanged([CallerMemberName] string? paramName = null)
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName));
     #endregion
-
 }

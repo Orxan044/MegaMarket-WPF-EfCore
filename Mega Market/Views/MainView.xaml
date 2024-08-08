@@ -1,0 +1,16 @@
+﻿<Window x:Class="Mega_Market.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mega_Market.Views"
+        mc:Ignorable="d" Icon="pack://application:,,,/Mega Market;component/Photos/mLogo.png"
+        Title="MainView" Height="450" Width="750"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="{x:Null}" ContentRendered="Window_ContentRendered">
+    <Grid>
+        <!-- Image Name Surname 1.DashBoard , 2.Store , 3.Basket , 4.Messsage 5.History 6.Settings  Back white-->
+        <Frame Content="{Binding CurrentPage}" Height="{Binding WindowHeight}" Width="{Binding WindowWitdh}" NavigationUIVisibility="Hidden" ></Frame>
+    
+    </Grid>
+</Window>

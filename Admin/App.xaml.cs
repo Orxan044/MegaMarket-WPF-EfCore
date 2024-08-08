@@ -41,6 +41,7 @@ public partial class App : Application
         Container.RegisterSingleton<AddCategoryViewModel>();
         Container.Register<ProductsViewModel>();
         Container.Register<ProductShowViewModel>();
+        Container.Register<AddProductViewModel>();
     }
 
     private static void AddViews()
@@ -53,6 +54,7 @@ public partial class App : Application
         Container.RegisterSingleton<AddCategoryView>();
         Container.RegisterSingleton<ProductsView>();
         Container.RegisterSingleton<ProductShowView>();
+        Container.RegisterSingleton<AddProductView>();
     }
 
     protected override void OnStartup(StartupEventArgs e)

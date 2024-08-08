@@ -18,12 +18,4 @@ public class MainViewModel : BaseViewModel , INotifyPropertyChanged
         _currentPage.DataContext = App.Container.GetInstance<MenyuViewModel>();
     }
 
-
-
-
-    #region INotifyPropertyChanged event
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string? paramName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName));
-    #endregion
 }

@@ -61,21 +61,5 @@ public class LoginViewModel : BaseViewModel
         Environment.Exit(0);
     }
 
-    #region Create notifier
-    ToastNotifications.Notifier notifier = new ToastNotifications.Notifier(cfg =>
-    {
-        cfg.PositionProvider = new WindowPositionProvider(
-            parentWindow: Application.Current.MainWindow,
-            corner: Corner.TopLeft,
-            offsetX: 5,
-            offsetY: 5);
-
-        cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
-            notificationLifetime: TimeSpan.FromSeconds(2),
-            maximumNotificationCount: MaximumNotificationCount.FromCount(1));
-
-        cfg.Dispatcher = Application.Current.Dispatcher;
-    });
-    #endregion
 
 }

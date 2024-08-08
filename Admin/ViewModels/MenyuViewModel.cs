@@ -74,6 +74,12 @@ public class MenyuViewModel : BaseViewModel, INotifyPropertyChanged
         CurrentPage2.DataContext = App.Container.GetInstance<ProductsViewModel>();
     }
 
+    public void AddProductsClick(object? obj)
+    {
+        CurrentPage2 = App.Container.GetInstance<AddProductView>();
+        CurrentPage2.DataContext = App.Container.GetInstance<AddProductViewModel>();
+    }
+
     private void ExitClick(object? obj)
     {
         _categoryRepository.SaveChanges();
@@ -82,9 +88,4 @@ public class MenyuViewModel : BaseViewModel, INotifyPropertyChanged
     }
 
 
-    #region INotifyPropertyChanged event
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string? paramName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName));
-    #endregion
 }

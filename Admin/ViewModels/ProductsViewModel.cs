@@ -19,8 +19,6 @@ public class ProductsViewModel : BaseViewModel , INotifyPropertyChanged
     private string? _searchText;
     private ICollectionView _productsView;
 
-    public Product product { get; set; } = new();
-
     public string SearchText
     {
         get => _searchText!;
@@ -41,6 +39,7 @@ public class ProductsViewModel : BaseViewModel , INotifyPropertyChanged
     public ObservableCollection<Product> Products { get => _products!; set { _products = value; OnPropertyChanged(); } }
 
     private readonly IRepository<Product,MarketDbContext> _productRepository;
+
     public ProductsViewModel(IRepository<Product,MarketDbContext> productRepository, MenyuViewModel menyuViewModel)
     {
         _menyuViewModel = menyuViewModel;
@@ -57,25 +56,26 @@ public class ProductsViewModel : BaseViewModel , INotifyPropertyChanged
 
     private void AddProductClick(object? obj)
     {
-        //
+        _menyuViewModel.AddProductsClick(obj);
     }
 
     private void ShowProductClick(object? id)
     {
         if (id is not null)
         {
-            product = _productRepository.Get(Convert.ToInt32(id))!;
+            var product = _productRepository.Get(Convert.ToInt32(id))!;
             _menyuViewModel.ShowProductClick(id);
             var mainVm = App.Current.MainWindow.DataContext as MainViewModel;
             if (mainVm is not null)
             {
                 var vm = _menyuViewModel.CurrentPage2!.DataContext as ProductShowViewModel;
+                vm!.Id = id;
                 vm!.SelectedProduct = product.Clone();
                 vm.SelectedCategory = product.Category!;
             }
         }     
     }
-
+        
     private bool FilterCategories(object obj)
     {
         if (obj is Product product)
@@ -86,19 +86,4 @@ public class ProductsViewModel : BaseViewModel , INotifyPropertyChanged
         
         return false;
     }
-
-
-
-    #region INotifyPropertyChanged event
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string? paramName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName));
-    #endregion
-
-
-
-
-
-
-
 }

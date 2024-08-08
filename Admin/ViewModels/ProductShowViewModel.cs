@@ -15,6 +15,7 @@ namespace Admin.ViewModels;
 
 public class ProductShowViewModel : BaseViewModel , INotifyPropertyChanged
 {
+    public object Id { get; set; }
     private Product? _selectedProduct;
     private Category? selectedCategory;
     private MenyuViewModel _viewModel;
@@ -43,30 +44,53 @@ public class ProductShowViewModel : BaseViewModel , INotifyPropertyChanged
 
     private void DeleteClick(object? obj)
     {
-        _productRepository.Delete(SelectedProduct);
-        _productRepository.SaveChanges();
-        notifier.ShowSuccess("The Product Has Been Remove Successfully !!!");
-        _viewModel.ProductsClick(obj);
+        try
+        {
+            var product = _productRepository.Get(Convert.ToInt32(Id));
+            _productRepository.Delete(product!);
+            _productRepository.SaveChanges();
+            notifier.ShowSuccess("The Product Has Been Remove Successfully !!!");
+            _viewModel.ProductsClick(obj);
+        }
+        catch (Exception)
+        {
+            notifier.ShowSuccess("The Not Found Product !!!");
+        }
+
     }
 
     private void UpdateClick(object? obj)
     {
-        //if (SelectedProduct.Category != SelectedCategory)
-        //{
-        //    _productRepository.Update(SelectedProduct);
-        //    _productRepository.SaveChanges();
-        //    notifier.ShowSuccess("The Product Has Been Updated Successfully !!!");
-        //    _viewModel.ProductsClick(obj);
-        //}
-        //else notifier.ShowWarning("The Elements Are All The Same !!!");
+
         try
         {
-            ProductsViewModel productsViewModel = new(_productRepository,_viewModel);
-            _productRepository.Update(productsViewModel.product);
-            _productRepository.SaveChanges();
-            notifier.ShowSuccess("The Product Has Been Updated Successfully !!!");
-            _viewModel.ProductsClick(obj);
+            if (_selectedProduct is null)
+            {
+                notifier.ShowError("No product selected to update.");
+                return;
+            }
 
+            var existingProduct = _productRepository.Get(Convert.ToInt32(Id));
+            if (existingProduct is null)
+            {
+                notifier.ShowError("Product not found in the database.");
+                return;
+            }
+            if(_selectedProduct.Quantity < 0 && _selectedProduct.Price < 0)
+            {
+                notifier.ShowError("Negative Number Cannot Be Entered");
+                return;
+            }
+            existingProduct.ImagePath = _selectedProduct.ImagePath;
+            existingProduct.Name = _selectedProduct.Name;
+            existingProduct.Description = _selectedProduct.Description;
+            existingProduct.Quantity = _selectedProduct.Quantity;
+            existingProduct.Price = _selectedProduct.Price;
+            existingProduct.IsSpecial = _selectedProduct.IsSpecial;
+            existingProduct.CategoryId = _selectedProduct.CategoryId;
+            existingProduct.Category = _selectedProduct.Category;
+            notifier.ShowSuccess("The product has been updated successfully!");
+            _viewModel.ProductsClick(obj);
         }
         catch (Exception)
         {
@@ -78,30 +102,4 @@ public class ProductShowViewModel : BaseViewModel , INotifyPropertyChanged
     {
         _viewModel.ProductsClick(obj);
     }
-
-
-
-
-    #region INotifyPropertyChanged event
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string? paramName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(paramName));
-    #endregion
-
-    #region Create notifier
-    ToastNotifications.Notifier notifier = new ToastNotifications.Notifier(cfg =>
-    {
-        cfg.PositionProvider = new WindowPositionProvider(
-            parentWindow: Application.Current.MainWindow,
-            corner: Corner.TopLeft,
-            offsetX: 5,
-            offsetY: 5);
-
-        cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
-            notificationLifetime: TimeSpan.FromSeconds(2),
-            maximumNotificationCount: MaximumNotificationCount.FromCount(1));
-
-        cfg.Dispatcher = Application.Current.Dispatcher;
-    });
-    #endregion
 }
